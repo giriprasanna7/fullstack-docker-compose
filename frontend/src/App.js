@@ -6,7 +6,7 @@ function App() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
 
-const API_URL = "http://54.175.89.180:5000";
+const API_URL = `http://${window.location.hostname}:5000`;
   const getContacts = async () => {
     try {
       const response = await fetch(`${API_URL}/contacts`);
