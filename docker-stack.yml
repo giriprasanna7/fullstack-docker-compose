@@ -1,0 +1,47 @@
+services:
+
+  frontend:
+    image: gi777/fullstack-frontend:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - fullstack-network
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+
+  backend:
+    image: gi777/fullstack-backend:latest
+    ports:
+      - "5000:5000"
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/contactdb
+    networks:
+      - fullstack-network
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+
+  mongodb:
+    image: mongo:7
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - fullstack-network
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+
+networks:
+  fullstack-network:
+    driver: overlay
+    attachable: true
+
+volumes:
+  mongo_data:
