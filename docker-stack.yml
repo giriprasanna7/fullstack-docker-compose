@@ -16,7 +16,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      MONGO_URI: mongodb://mongodb:27017/contactdb
+      MONGO_URI: mongodb://fullstack_mongodb:27017/contactdb
     networks:
       - fullstack-network
     deploy:
