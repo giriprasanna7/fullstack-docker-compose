@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
 
   frontend:
@@ -16,7 +18,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      MONGO_URI: mongodb://fullstack_mongodb:27017/contactdb
+      MONGO_URI: mongodb://mongodb:27017/contactdb
     networks:
       - fullstack-network
     deploy:
@@ -26,6 +28,8 @@ services:
 
   mongodb:
     image: mongo:7
+    ports:
+      - "27017:27017"
     volumes:
       - mongo_data:/data/db
     networks:
